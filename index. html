@@ -1,12 +1,69 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ТУСОВКА</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ТУСОВКА ❤️</title>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #ffd6e7, #d9e8ff);
+  text-align: center;
+  color: #4a245e;
+}
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 40px 20px;
+}
+h1 {
+  font-size: 48px;
+  margin: 20px 0 10px;
+}
+p {
+  font-size: 20px;
+}
+.card {
+  background: white;
+  border-radius: 25px;
+  padding: 25px;
+  margin-top: 30px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+button {
+  border: 0;
+  border-radius: 30px;
+  padding: 15px 30px;
+  margin: 8px;
+  font-size: 18px;
+  cursor: pointer;
+}
+.start {
+  background: #ff5fa2;
+  color: white;
+}
+.rooms {
+  background: #eee;
+  color: #4a245e;
+}
+</style>
 </head>
+
 <body>
-  <h1>ТУСОВКА ❤️</h1>
-  <p>Добро пожаловать!</p>
+<div class="container">
+
+<h1>ТУСОВКА ❤️</h1>
+<p>Здесь начинается твоя тусовка!</p>
+
+<div class="card">
+<h2>🎉 Добро пожаловать!</h2>
+<p>Знакомься, общайся, играй и находи свою компанию.</p>
+
+<button class="start">🎮 Начать игру</button>
+<button class="rooms">🏠 Комнаты</button>
+</div>
+
+</div>
 </body>
 </html>
