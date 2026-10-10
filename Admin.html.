@@ -1,0 +1,63 @@
+<!DOCTYPE html><html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ТУСОВКА — Админ-панель</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #fff0f6;
+      color: #542044;
+    }
+    h1 {
+      text-align: center;
+      color: #c2185b;
+    }
+    .note {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+    }
+    button {
+      padding: 18px 10px;
+      border: 0;
+      border-radius: 14px;
+      background: #c2185b;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #info {
+      margin-top: 22px;
+      padding: 16px;
+      border-radius: 12px;
+      background: white;
+      min-height: 50px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 ТУСОВКА</h1>
+  <p class="note">Панель управления игрой</p>  <div class="menu">
+    <button onclick="showInfo('Здесь будут настройки комнат.')">🏠 Комнаты</button>
+    <button onclick="showInfo('Здесь будет список игроков и роли.')">👥 Игроки</button>
+    <button onclick="showInfo('Здесь будут подарки и цены в Тусах.')">🎁 Подарки</button>
+    <button onclick="showInfo('Здесь будут настройки валюты Тусы.')">💰 Тусы</button>
+    <button onclick="showInfo('Здесь будут настройки VIP.')">👑 VIP</button>
+    <button onclick="showInfo('Здесь будут задания и календарь.')">📅 Задания</button>
+    <button onclick="showInfo('Здесь будут музыка и чаты.')">🎵 Музыка и чаты</button>
+    <button onclick="showInfo('Здесь будут уровни и награды.')">🏆 Уровни</button>
+    <button onclick="showInfo('Здесь будут мини-игры, включая тараканьи бега.')">🪳 Мини-игры</button>
+    <button onclick="showInfo('Здесь будут оформление и декор.')">✨ Оформление</button>
+  </div>  <div id="info">Выбери раздел управления.</div>  <script>
+    function showInfo(message) {
+      document.getElementById('info').textContent = message;
+    }
+  </script></body>
+</html>
