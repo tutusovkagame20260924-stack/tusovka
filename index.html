@@ -59,5 +59,27 @@ button {
 <button class="rooms">🏠 Комнаты</button>
 </div>
 </div>
-</body>
+<script>
+const card = document.querySelector('.card');
+
+document.querySelector('.start').onclick = function() {
+  card.innerHTML = `
+    <h2>🎉 Добро пожаловать в ТУСОВКУ!</h2>
+    <p>Твоя тусовка начинается здесь ❤️</p>
+    <p>Скоро здесь появится вход в игру!</p>
+    <button onclick="location.reload()">🏠 На главную</button>
+  `;
+};
+
+document.querySelector('.rooms').onclick = function() {
+  card.innerHTML = `
+    <h2>🏠 Комнаты ТУСОВКИ</h2>
+    <p>💖 Знакомство с игрой</p>
+    <p>⚽ Спортивная комната</p>
+    <p>☕ Кафе</p>
+    <p>🌸 Времена года</p>
+    <button onclick="location.reload()">🏠 На главную</button>
+  `;
+};
+</script>
 </html>
