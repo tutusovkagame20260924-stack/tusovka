@@ -1,88 +1,143 @@
-<!DOCTYPE html><html lang="ru">
+<!DOCTYPE html>
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ТУСОВКА ❤️</title>
+
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  padding: 20px;
+  min-height: 100vh;
   font-family: Arial, sans-serif;
   background: linear-gradient(135deg, #ffd6e7, #e6ccff);
-  text-align: center;
   color: #4a245e;
+  text-align: center;
 }
+
 .container {
-  max-width: 600px;
-  margin: auto;
-  padding: 40px 20px;
+  max-width: 500px;
+  margin: 0 auto;
 }
+
 h1 {
-  font-size: 48px;
-  margin: 20px 0 10px;
+  color: #b83280;
+  font-size: 34px;
 }
-p {
-  font-size: 20px;
-}
+
 .card {
-  background: white;
-  border-radius: 25px;
-  padding: 25px;
-  margin-top: 30px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.9);
+  border-radius: 22px;
+  padding: 22px;
+  margin-top: 20px;
+  box-shadow: 0 5px 20px rgba(100,30,100,0.15);
 }
+
 button {
-  border: 0;
-  border-radius: 30px;
-  padding: 15px 30px;
-  margin: 8px;
-  font-size: 18px;
+  display: block;
+  width: 100%;
+  padding: 14px;
+  margin: 12px 0;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ff79b0, #bd82ff);
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
   cursor: pointer;
 }
-.start {
-  background: #ff5fa2;
-  color: white;
+
+button:active {
+  transform: scale(0.98);
 }
-.rooms {
-  background: #eee;
-  color: #4a245e;
+
+p {
+  line-height: 1.5;
+}
+
+.coins {
+  color: #b83280;
+  font-weight: bold;
 }
 </style>
 </head>
+
 <body>
 <div class="container">
-<h1>ТУСОВКА ❤️</h1> 
-<p>Здесь начинается твоя тусовка!</p>
-<div class="card">
-<h2>🎉 Добро пожаловать!</h2>
-<p>Знакомься, общайся, играй и находи свою компанию.</p>
-<button class="start">🎮 Начать игру</button>
-<button class="rooms">🏠 Комнаты</button>
+  <h1>ТУСОВКА ❤️</h1>
+  <p>Твоя компания, твои друзья, твои приключения!</p>
+  <div class="card" id="card"></div>
 </div>
-</div>
+
 <script>
-const card = document.querySelector('.card');
+const card = document.getElementById("card");
 
-document.querySelector('.start').onclick = function() {
+function home() {
   card.innerHTML = `
-    <h2>🎉 Добро пожаловать в ТУСОВКУ!</h2>
-    <p>Твоя тусовка начинается здесь ❤️</p>
-    <p>Скоро здесь появится вход в игру!</p>
-    <button onclick="location.reload()">🏠 На главную</button>
+    <h2>🎉 Добро пожаловать!</h2>
+    <p>Знакомься, общайся, играй и находи свою компанию.</p>
+    <button onclick="startGame()">🎮 Начать игру</button>
+    <button onclick="rooms()">🏠 Комнаты</button>
   `;
-};
+}
 
-document.querySelector('.rooms').onclick = function() {
+function startGame() {
+  card.innerHTML = `
+    <h2>🎉 Твоя ТУСОВКА начинается!</h2>
+    <p>💖 Здесь ты сможешь знакомиться и находить друзей.</p>
+    <p>🎁 Впереди подарки, задания и игровые события!</p>
+    <button onclick="rooms()">🏠 Выбрать комнату</button>
+    <button onclick="home()">⬅️ На главную</button>
+  `;
+}
+
+function rooms() {
   card.innerHTML = `
     <h2>🏠 Комнаты ТУСОВКИ</h2>
-    <button onclick="showNewRoom()">💖 Знакомство с игрой</button>
-    <p>⚽ Спортивная комната</p>
-    <p>☕ Кафе</p>
-    <p>🌸 Времена года</p>
-    <button onclick="location.reload()">🏠 На главную</button>
+    <p>Выбери, куда отправимся!</p>
+    <button onclick="newcomer()">💖 Знакомство с игрой</button>
+    <button onclick="openRoom('⚽ Спортивная комната',
+    'Спортивные разговоры и весёлые соревнования!')">
+    ⚽ Спортивная комната</button>
+    <button onclick="openRoom('☕ Кафе',
+    'Уютное кафе для общения и новых знакомств!')">
+    ☕ Кафе</button>
+    <button onclick="openRoom('🌸 Времена года',
+    'Здесь можно наслаждаться весной, летом, осенью и зимой!')">
+    🌸 Времена года</button>
+    <button onclick="home()">⬅️ На главную</button>
   `;
-};
-function showNewRoom() {
-card.innerHTML = "<h2>💖 Знакомство с игрой</h2> <p>🌸 Добро пожаловать в ТУСОВКУ!</p> <p>👋 Здесь начинается твоё приключение!</p> <p>📋 Первое задание: поздоровайся с игроками.</p> <p>🎁 Твой первый подарок — «Привет!»</p> <button onclick="location.reload()">🏠 На главную</button>";
 }
+
+function newcomer() {
+  card.innerHTML = `
+    <h2>💖 Знакомство с игрой</h2>
+    <p>🌸 Добро пожаловать в ТУСОВКУ!</p>
+    <p>👋 Здесь начинается твоё приключение.</p>
+    <p>📋 Первое задание: поздоровайся с игроками.</p>
+    <p>🎁 Твой первый подарок — «Привет!»</p>
+    <button onclick="rooms()">🏠 Другие комнаты</button>
+    <button onclick="home()">⬅️ На главную</button>
+  `;
+}
+
+function openRoom(title, description) {
+  card.innerHTML = `
+    <h2>${title}</h2>
+    <p>${description}</p>
+    <p>💬 Комната готова к дальнейшей разработке.</p>
+    <p>👥 Игроки: пока нет подключённых игроков.</p>
+    <button onclick="rooms()">🏠 Список комнат</button>
+    <button onclick="home()">⬅️ На главную</button>
+  `;
+}
+
+home();
 </script>
+</body>
 </html>
