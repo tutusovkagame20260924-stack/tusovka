@@ -74,12 +74,15 @@ document.querySelector('.start').onclick = function() {
 document.querySelector('.rooms').onclick = function() {
   card.innerHTML = `
     <h2>🏠 Комнаты ТУСОВКИ</h2>
-    <p>💖 Знакомство с игрой</p>
+    <button onclick="showNewRoom()">💖 Знакомство с игрой</button>
     <p>⚽ Спортивная комната</p>
     <p>☕ Кафе</p>
     <p>🌸 Времена года</p>
     <button onclick="location.reload()">🏠 На главную</button>
   `;
 };
+function showNewRoom() {
+card.innerHTML = "<h2>💖 Знакомство с игрой</h2> <p>🌸 Добро пожаловать в ТУСОВКУ!</p> <p>👋 Здесь начинается твоё приключение!</p> <p>📋 Первое задание: поздоровайся с игроками.</p> <p>🎁 Твой первый подарок — «Привет!»</p> <button onclick="location.reload()">🏠 На главную</button>";
+}
 </script>
 </html>
