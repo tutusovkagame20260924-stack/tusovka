@@ -130,8 +130,12 @@ function openRoom(title, description) {
   card.innerHTML = `
     <h2>${title}</h2>
     <p>${description}</p>
-    <p>💬 Комната готова к дальнейшей разработке.</p>
-    <p>👥 Игроки: пока нет подключённых игроков.</p>
+    <p>👥 Игроки в комнате: 😊 Аня и 😎 Макс (демо)</p>
+<p>🎁 Выбери подарок:</p>
+<button onclick="alert('🌹 Ты отправила розу! Это демонстрация.')">🌹 Роза</button>
+<button onclick="alert('❤️ Ты отправила сердечко! Это демонстрация.')">❤️ Сердечко</button>
+<button onclick="alert('🐈 Ты отправила котика! Это демонстрация.')">🐈 Котик</button>
+    
     <button onclick="rooms()">🏠 Список комнат</button>
     <button onclick="home()">⬅️ На главную</button>
   `;
