@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -64,6 +63,7 @@ p {
 .coins {
   color: #b83280;
   font-weight: bold;
+}
 
 /* ЗИМНЯЯ КОМНАТА */
 
@@ -81,6 +81,7 @@ p {
   padding: 15px;
   margin: 15px 0;
 }
+
 .winter-label {
   background: rgba(40,30,60,0.65);
   color: white;
@@ -88,7 +89,6 @@ p {
   border-radius: 15px;
   font-weight: bold;
 }
-
 </style>
 </head>
 
@@ -192,28 +192,10 @@ function winterRoom() {
   card.innerHTML = `
     <h2>❄️ Зимняя ТУСОВКА</h2>
 
-    /* ЗИМНЯЯ КОМНАТА */
-
-/* ЗИМНЯЯ КОМНАТА */
-
-.winter-room {
-  width: 100%;
-  min-height: 330px;
-  border-radius: 18px;
-  background-image: url("winte-room-1.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 15px;
-  margin: 15px 0;
-}
+    <div class="winter-room">
       <div class="winter-label">
         ❄️ Зимняя комната ❤️
       </div>
-
     </div>
 
     <p>Добро пожаловать в уютную зимнюю комнату!</p>
