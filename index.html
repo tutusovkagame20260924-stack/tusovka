@@ -47,7 +47,7 @@ button {
   border-radius: 14px;
   background: linear-gradient(135deg, #ff79b0, #bd82ff);
   color: white;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: bold;
   cursor: pointer;
 }
@@ -63,6 +63,13 @@ p {
 .coins {
   color: #b83280;
   font-weight: bold;
+}
+
+.room-info {
+  background: #fff0f7;
+  border-radius: 14px;
+  padding: 12px;
+  margin: 12px 0;
 }
 
 /* ЗИМНЯЯ КОМНАТА */
@@ -82,44 +89,120 @@ p {
   margin: 15px 0;
 }
 
-.winter-label {
-  background: rgba(40,30,60,0.65);
+.winter-label,
+.football-label {
+  background: rgba(40,30,60,0.75);
   color: white;
   padding: 10px 18px;
   border-radius: 15px;
   font-weight: bold;
 }
 
-/* ФУТБОЛЬНАЯ КОМНАТА */
+/* ФУТБОЛЬНОЕ ПОЛЕ */
 
 .football-room {
+  position: relative;
   width: 100%;
-  min-height: 330px;
+  min-height: 390px;
   border-radius: 18px;
   background-image: url("1793609555494.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 15px;
   margin: 15px 0;
+  overflow: hidden;
 }
 
 .football-label {
-  background: rgba(20,40,70,0.75);
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 12px;
+  z-index: 2;
+}
+
+/* МЕСТА ИГРОКОВ */
+
+.player-seat {
+  position: absolute;
+  width: 54px;
+  height: 48px;
+  border-radius: 13px;
+  border: 2px solid white;
   color: white;
-  padding: 10px 18px;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 3px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.pink-seat {
+  background: #ed65a5;
+}
+
+.blue-seat {
+  background: #4389e9;
+}
+
+.player-seat span {
+  font-size: 19px;
+  line-height: 20px;
+}
+
+.seat-left {
+  left: 5px;
+}
+
+.seat-right {
+  right: 5px;
+}
+
+.seat-1 { top: 7%; }
+.seat-2 { top: 25%; }
+.seat-3 { top: 43%; }
+.seat-4 { top: 61%; }
+.seat-5 { top: 79%; }
+
+/* ТОП ИГРЫ */
+
+.top-button {
+  background: linear-gradient(135deg, #ffb52e, #ff6e9d);
+}
+
+.top-entry {
+  background: #fff0f7;
+  border: 1px solid #f4c2df;
   border-radius: 15px;
+  padding: 12px;
+  margin: 12px 0;
+  overflow-wrap: anywhere;
+}
+
+.top-avatar {
+  font-size: 32px;
+}
+
+.top-text {
+  font-weight: bold;
+  margin: 8px 0;
+}
+
+.top-name {
+  color: #b83280;
   font-weight: bold;
 }
 
-.room-info {
-  background: #fff0f7;
-  border-radius: 14px;
-  padding: 12px;
-  margin: 12px 0;
+.small-note {
+  font-size: 12px;
+  color: #866b91;
 }
 </style>
 </head>
@@ -129,7 +212,6 @@ p {
 <div class="container">
 
 <h1>ТУСОВКА ❤️</h1>
-
 <p>Твоя компания, твои друзья, твои приключения!</p>
 
 <div class="card" id="card"></div>
@@ -140,14 +222,56 @@ p {
 
 const card = document.getElementById("card");
 
+/* ДЕМО-БАЛАНС */
+
+let demoCoins = Number(localStorage.getItem("tusovkaDemoCoins"));
+
+if (!Number.isFinite(demoCoins) || demoCoins < 0) {
+  demoCoins = 100;
+}
+
+function saveCoins() {
+  localStorage.setItem("tusovkaDemoCoins", demoCoins);
+}
+
+/* ДЕМО-ЛЕНТА */
+
+let topEntries = [];
+
+try {
+  topEntries = JSON.parse(
+    localStorage.getItem("tusovkaTopEntries") || "[]"
+  );
+
+  if (!Array.isArray(topEntries)) topEntries = [];
+} catch (e) {
+  topEntries = [];
+}
+
+function saveTop() {
+  localStorage.setItem(
+    "tusovkaTopEntries",
+    JSON.stringify(topEntries)
+  );
+}
+
 /* ГЛАВНАЯ */
 
 function home() {
   card.innerHTML = `
     <h2>🎉 Добро пожаловать!</h2>
+
     <p>Знакомься, общайся, играй и находи свою компанию.</p>
+
+    <p class="coins">🪙 Твои Тусы: ${demoCoins}</p>
+
     <button onclick="startGame()">🎮 Начать игру</button>
+
     <button onclick="rooms()">🏠 Комнаты</button>
+
+    <button class="top-button" onclick="topGame()">
+      🏆 ТОП ИГРЫ
+    </button>
   `;
 }
 
@@ -156,25 +280,30 @@ function home() {
 function startGame() {
   card.innerHTML = `
     <h2>🎉 Твоя ТУСОВКА начинается!</h2>
+
     <p>💖 Здесь ты сможешь знакомиться и находить друзей.</p>
+
     <p>🎁 Впереди подарки, задания и игровые события!</p>
+
     <button onclick="rooms()">🏠 Выбрать комнату</button>
+
+    <button class="top-button" onclick="topGame()">🏆 ТОП ИГРЫ</button>
+
     <button onclick="home()">⬅️ На главную</button>
   `;
 }
 
-/* СПИСОК КОМНАТ */
+/* КОМНАТЫ */
 
 function rooms() {
   card.innerHTML = `
     <h2>🏠 Комнаты ТУСОВКИ</h2>
+
     <p>Выбери, куда отправимся!</p>
 
     <button onclick="newcomer()">💖 Знакомство с игрой</button>
 
-    <button onclick="footballRoom()">
-      ⚽ Спортивная комната
-    </button>
+    <button onclick="footballRoom()">⚽ Спортивная комната</button>
 
     <button onclick="openRoom('☕ Кафе',
     'Уютное кафе для общения и новых знакомств!')">
@@ -182,6 +311,8 @@ function rooms() {
     </button>
 
     <button onclick="seasons()">🌸 Времена года</button>
+
+    <button class="top-button" onclick="topGame()">🏆 ТОП ИГРЫ</button>
 
     <button onclick="home()">⬅️ На главную</button>
   `;
@@ -192,6 +323,7 @@ function rooms() {
 function seasons() {
   card.innerHTML = `
     <h2>🌸 Времена года</h2>
+
     <p>Выбери свою сезонную комнату!</p>
 
     <button onclick="winterRoom()">❄️ Зимняя комната</button>
@@ -227,71 +359,203 @@ function winterRoom() {
     <p>🔥 Тёплый камин, снежные пейзажи и приятная атмосфера.</p>
 
     <div class="room-info">
-      👥 Игроки в комнате: 😊 Аня и 😎 Макс (демо)
+      👥 Игроки: 😊 Аня и 😎 Макс (демо)
     </div>
 
     <p>🎁 Выбери подарок:</p>
 
-    <button onclick="alert('🌹 Ты отправила розу! Это демонстрация.')">
-      🌹 Роза
-    </button>
+    <button onclick="alert('🌹 Ты отправила розу! Демонстрация.')">🌹 Роза</button>
 
-    <button onclick="alert('❤️ Ты отправила сердечко! Это демонстрация.')">
-      ❤️ Сердечко
-    </button>
+    <button onclick="alert('❤️ Ты отправила сердечко! Демонстрация.')">❤️ Сердечко</button>
 
-    <button onclick="alert('🐈 Ты отправила котика! Это демонстрация.')">
-      🐈 Котик
-    </button>
+    <button onclick="alert('🐈 Ты отправила котика! Демонстрация.')">🐈 Котик</button>
 
     <button onclick="seasons()">🌸 Сезоны</button>
+
     <button onclick="rooms()">🏠 Другие комнаты</button>
+
     <button onclick="home()">⬅️ На главную</button>
   `;
 }
 
 /* ФУТБОЛЬНАЯ КОМНАТА */
 
+let occupiedSeats = {};
+
 function footballRoom() {
+
+  let seatsHTML = "";
+
+  for (let i = 1; i <= 5; i++) {
+    seatsHTML += `
+      <button class="player-seat pink-seat seat-left seat-${i}"
+        onclick="takeSeat('pink', ${i})">
+        ${occupiedSeats["pink" + i] || "<span>＋</span>Свободно"}
+      </button>
+
+      <button class="player-seat blue-seat seat-right seat-${i}"
+        onclick="takeSeat('blue', ${i})">
+        ${occupiedSeats["blue" + i] || "<span>＋</span>Свободно"}
+      </button>
+    `;
+  }
+
   card.innerHTML = `
     <h2>⚽ Футбольная ТУСОВКА</h2>
 
     <div class="football-room">
+      ${seatsHTML}
       <div class="football-label">⚽ Спортивная комната ❤️</div>
     </div>
-
-    <p>Добро пожаловать на футбольное поле!</p>
 
     <p>🏆 Здесь можно общаться, болеть за команды и участвовать в соревнованиях!</p>
 
     <div class="room-info">
-      🔵 Синяя команда — 5 мест<br>
-      🔴 Розовая команда — 5 мест
+      🌸 Розовая команда — 5 мест<br>
+      💙 Синяя команда — 5 мест
     </div>
 
-    <p>👥 Игроки: демо-режим</p>
+    <p>👥 Игроков: ${Object.keys(occupiedSeats).length} / 10</p>
 
     <p>🎁 Спортивные подарки:</p>
 
-    <button onclick="alert('🏆 Ты отправила золотой кубок! Это демонстрация.')">
-      🏆 Золотой кубок
-    </button>
+    <button onclick="alert('🏆 Золотой кубок! Демонстрация.')">🏆 Золотой кубок</button>
 
-    <button onclick="alert('🥈 Ты отправила серебряный кубок! Это демонстрация.')">
-      🥈 Серебряный кубок
-    </button>
+    <button onclick="alert('🥈 Серебряный кубок! Демонстрация.')">🥈 Серебряный кубок</button>
 
-    <button onclick="alert('⚽ Ты отправила футбольный мяч! Это демонстрация.')">
-      ⚽ Футбольный мяч
-    </button>
+    <button onclick="alert('⚽ Футбольный мяч! Демонстрация.')">⚽ Футбольный мяч</button>
 
-    <button onclick="alert('🟥 Красная карточка! Это демонстрация.')">
-      🟥 Красная карточка
-    </button>
+    <button onclick="alert('🟥 Красная карточка! Демонстрация.')">🟥 Красная карточка</button>
+
+    <button class="top-button" onclick="topGame()">🏆 ТОП ИГРЫ</button>
 
     <button onclick="rooms()">🏠 Другие комнаты</button>
+
     <button onclick="home()">⬅️ На главную</button>
   `;
+}
+
+/* ЗАНЯТЬ МЕСТО */
+
+function takeSeat(team, number) {
+  const key = team + number;
+
+  if (occupiedSeats[key]) {
+    alert("Это место уже занято!");
+    return;
+  }
+
+  if (Object.keys(occupiedSeats).length >= 10) {
+    alert("Все места заняты!");
+    return;
+  }
+
+  const avatar = prompt("Выбери эмодзи для своего аватара:", "😊");
+
+  if (avatar === null || avatar.trim() === "") return;
+
+  occupiedSeats[key] = `<span>${escapeHTML(avatar.trim())}</span>Ты`;
+
+  footballRoom();
+}
+
+function escapeHTML(text) {
+  return text.replace(/[&<>"']/g, function(char) {
+    return {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    }[char];
+  });
+}
+
+/* ТОП ИГРЫ */
+
+function topGame() {
+
+  let entriesHTML = "";
+
+  if (topEntries.length === 0) {
+    entriesHTML = "<p>🌟 Пока записей нет. Будь первым!</p>";
+  } else {
+    topEntries.forEach(function(entry) {
+      entriesHTML += `
+        <div class="top-entry">
+          <div class="top-avatar">${escapeHTML(entry.avatar)}</div>
+          <div class="top-name">${escapeHTML(entry.name)}</div>
+          <div class="top-text">${escapeHTML(entry.text)}</div>
+        </div>
+      `;
+    });
+  }
+
+  card.innerHTML = `
+    <h2>🏆 ТОП ИГРЫ</h2>
+
+    <p>🌟 Общая лента игроков ТУСОВКИ</p>
+
+    <p class="coins">🪙 Твои Тусы: ${demoCoins}</p>
+
+    <button class="top-button" onclick="publishTop()">
+      ⭐ ХОЧУ В ТОП — 10 Тус
+    </button>
+
+    ${entriesHTML}
+
+    <p class="small-note">
+      Максимум 6 записей. Не более 10 слов.
+    </p>
+
+    <button onclick="rooms()">🏠 Комнаты</button>
+
+    <button onclick="home()">⬅️ На главную</button>
+  `;
+}
+
+/* ПУБЛИКАЦИЯ В ТОП */
+
+function publishTop() {
+
+  if (demoCoins < 10) {
+    alert("Недостаточно Тус для публикации!");
+    return;
+  }
+
+  const message = prompt("Напиши сообщение для ТОП (не больше 10 слов):");
+
+  if (message === null) return;
+
+  const text = message.trim();
+  const words = text.split(/\s+/).filter(Boolean);
+
+  if (!text) {
+    alert("Напиши сообщение!");
+    return;
+  }
+
+  if (words.length > 10) {
+    alert("Максимум 10 слов!");
+    return;
+  }
+
+  demoCoins -= 10;
+  saveCoins();
+
+  topEntries.unshift({
+    avatar: "😊",
+    name: "Игрок",
+    text: text
+  });
+
+  topEntries = topEntries.slice(0, 6);
+
+  saveTop();
+
+  alert("🌟 Твоя запись появилась в ТОП! Списано 10 Тус.");
+
+  topGame();
 }
 
 /* ЗНАКОМСТВО */
@@ -309,6 +573,7 @@ function newcomer() {
     <p>🎁 Твой первый подарок — «Привет!»</p>
 
     <button onclick="rooms()">🏠 Другие комнаты</button>
+
     <button onclick="home()">⬅️ На главную</button>
   `;
 }
@@ -322,24 +587,21 @@ function openRoom(title, description) {
     <p>${description}</p>
 
     <div class="room-info">
-      👥 Игроки в комнате: 😊 Аня и 😎 Макс (демо)
+      👥 Игроки: 😊 Аня и 😎 Макс (демо)
     </div>
 
     <p>🎁 Выбери подарок:</p>
 
-    <button onclick="alert('🌹 Ты отправила розу! Это демонстрация.')">
-      🌹 Роза
-    </button>
+    <button onclick="alert('🌹 Роза! Демонстрация.')">🌹 Роза</button>
 
-    <button onclick="alert('❤️ Ты отправила сердечко! Это демонстрация.')">
-      ❤️ Сердечко
-    </button>
+    <button onclick="alert('❤️ Сердечко! Демонстрация.')">❤️ Сердечко</button>
 
-    <button onclick="alert('🐈 Ты отправила котика! Это демонстрация.')">
-      🐈 Котик
-    </button>
+    <button onclick="alert('🐈 Котик! Демонстрация.')">🐈 Котик</button>
+
+    <button onclick="topGame()">🏆 ТОП ИГРЫ</button>
 
     <button onclick="rooms()">🏠 Список комнат</button>
+
     <button onclick="home()">⬅️ На главную</button>
   `;
 }
