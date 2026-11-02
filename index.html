@@ -89,6 +89,38 @@ p {
   border-radius: 15px;
   font-weight: bold;
 }
+
+/* ФУТБОЛЬНАЯ КОМНАТА */
+
+.football-room {
+  width: 100%;
+  min-height: 330px;
+  border-radius: 18px;
+  background-image: url("179360955549.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 15px;
+  margin: 15px 0;
+}
+
+.football-label {
+  background: rgba(20,40,70,0.75);
+  color: white;
+  padding: 10px 18px;
+  border-radius: 15px;
+  font-weight: bold;
+}
+
+.room-info {
+  background: #fff0f7;
+  border-radius: 14px;
+  padding: 12px;
+  margin: 12px 0;
+}
 </style>
 </head>
 
@@ -108,124 +140,163 @@ p {
 
 const card = document.getElementById("card");
 
-function home() {
+/* ГЛАВНАЯ */
 
+function home() {
   card.innerHTML = `
     <h2>🎉 Добро пожаловать!</h2>
-
     <p>Знакомься, общайся, играй и находи свою компанию.</p>
-
     <button onclick="startGame()">🎮 Начать игру</button>
-
     <button onclick="rooms()">🏠 Комнаты</button>
   `;
-
 }
+
+/* НАЧАЛО ИГРЫ */
 
 function startGame() {
-
   card.innerHTML = `
     <h2>🎉 Твоя ТУСОВКА начинается!</h2>
-
     <p>💖 Здесь ты сможешь знакомиться и находить друзей.</p>
-
     <p>🎁 Впереди подарки, задания и игровые события!</p>
-
     <button onclick="rooms()">🏠 Выбрать комнату</button>
-
     <button onclick="home()">⬅️ На главную</button>
   `;
-
 }
 
-function rooms() {
+/* СПИСОК КОМНАТ */
 
+function rooms() {
   card.innerHTML = `
     <h2>🏠 Комнаты ТУСОВКИ</h2>
-
     <p>Выбери, куда отправимся!</p>
 
     <button onclick="newcomer()">💖 Знакомство с игрой</button>
 
-    <button onclick="openRoom('⚽ Спортивная комната',
-    'Спортивные разговоры и весёлые соревнования!')">
-    ⚽ Спортивная комната</button>
+    <button onclick="footballRoom()">
+      ⚽ Спортивная комната
+    </button>
 
     <button onclick="openRoom('☕ Кафе',
     'Уютное кафе для общения и новых знакомств!')">
-    ☕ Кафе</button>
+      ☕ Кафе
+    </button>
 
     <button onclick="seasons()">🌸 Времена года</button>
 
     <button onclick="home()">⬅️ На главную</button>
   `;
-
 }
 
-function seasons() {
+/* ВРЕМЕНА ГОДА */
 
+function seasons() {
   card.innerHTML = `
     <h2>🌸 Времена года</h2>
-
     <p>Выбери свою сезонную комнату!</p>
 
     <button onclick="winterRoom()">❄️ Зимняя комната</button>
 
     <button onclick="alert('🌸 Весенняя комната появится позже!')">
-    🌸 Весенняя комната</button>
+      🌸 Весенняя комната
+    </button>
 
     <button onclick="alert('☀️ Летняя комната появится позже!')">
-    ☀️ Летняя комната</button>
+      ☀️ Летняя комната
+    </button>
 
     <button onclick="alert('🍂 Осенняя комната появится позже!')">
-    🍂 Осенняя комната</button>
+      🍂 Осенняя комната
+    </button>
 
     <button onclick="rooms()">🏠 Другие комнаты</button>
   `;
-
 }
 
 /* ЗИМНЯЯ КОМНАТА */
 
 function winterRoom() {
-
   card.innerHTML = `
     <h2>❄️ Зимняя ТУСОВКА</h2>
 
     <div class="winter-room">
-      <div class="winter-label">
-        ❄️ Зимняя комната ❤️
-      </div>
+      <div class="winter-label">❄️ Зимняя комната ❤️</div>
     </div>
 
     <p>Добро пожаловать в уютную зимнюю комнату!</p>
 
     <p>🔥 Тёплый камин, снежные пейзажи и приятная атмосфера.</p>
 
-    <p>👥 Игроки в комнате: 😊 Аня и 😎 Макс (демо)</p>
+    <div class="room-info">
+      👥 Игроки в комнате: 😊 Аня и 😎 Макс (демо)
+    </div>
 
     <p>🎁 Выбери подарок:</p>
 
     <button onclick="alert('🌹 Ты отправила розу! Это демонстрация.')">
-    🌹 Роза</button>
+      🌹 Роза
+    </button>
 
     <button onclick="alert('❤️ Ты отправила сердечко! Это демонстрация.')">
-    ❤️ Сердечко</button>
+      ❤️ Сердечко
+    </button>
 
     <button onclick="alert('🐈 Ты отправила котика! Это демонстрация.')">
-    🐈 Котик</button>
+      🐈 Котик
+    </button>
 
     <button onclick="seasons()">🌸 Сезоны</button>
-
     <button onclick="rooms()">🏠 Другие комнаты</button>
-
     <button onclick="home()">⬅️ На главную</button>
   `;
-
 }
 
-function newcomer() {
+/* ФУТБОЛЬНАЯ КОМНАТА */
 
+function footballRoom() {
+  card.innerHTML = `
+    <h2>⚽ Футбольная ТУСОВКА</h2>
+
+    <div class="football-room">
+      <div class="football-label">⚽ Спортивная комната ❤️</div>
+    </div>
+
+    <p>Добро пожаловать на футбольное поле!</p>
+
+    <p>🏆 Здесь можно общаться, болеть за команды и участвовать в соревнованиях!</p>
+
+    <div class="room-info">
+      🔵 Синяя команда — 5 мест<br>
+      🔴 Розовая команда — 5 мест
+    </div>
+
+    <p>👥 Игроки: демо-режим</p>
+
+    <p>🎁 Спортивные подарки:</p>
+
+    <button onclick="alert('🏆 Ты отправила золотой кубок! Это демонстрация.')">
+      🏆 Золотой кубок
+    </button>
+
+    <button onclick="alert('🥈 Ты отправила серебряный кубок! Это демонстрация.')">
+      🥈 Серебряный кубок
+    </button>
+
+    <button onclick="alert('⚽ Ты отправила футбольный мяч! Это демонстрация.')">
+      ⚽ Футбольный мяч
+    </button>
+
+    <button onclick="alert('🟥 Красная карточка! Это демонстрация.')">
+      🟥 Красная карточка
+    </button>
+
+    <button onclick="rooms()">🏠 Другие комнаты</button>
+    <button onclick="home()">⬅️ На главную</button>
+  `;
+}
+
+/* ЗНАКОМСТВО */
+
+function newcomer() {
   card.innerHTML = `
     <h2>💖 Знакомство с игрой</h2>
 
@@ -238,38 +309,42 @@ function newcomer() {
     <p>🎁 Твой первый подарок — «Привет!»</p>
 
     <button onclick="rooms()">🏠 Другие комнаты</button>
-
     <button onclick="home()">⬅️ На главную</button>
   `;
-
 }
 
-function openRoom(title, description) {
+/* ОБЫЧНЫЕ КОМНАТЫ */
 
+function openRoom(title, description) {
   card.innerHTML = `
     <h2>${title}</h2>
 
     <p>${description}</p>
 
-    <p>👥 Игроки в комнате: 😊 Аня и 😎 Макс (демо)</p>
+    <div class="room-info">
+      👥 Игроки в комнате: 😊 Аня и 😎 Макс (демо)
+    </div>
 
     <p>🎁 Выбери подарок:</p>
 
     <button onclick="alert('🌹 Ты отправила розу! Это демонстрация.')">
-    🌹 Роза</button>
+      🌹 Роза
+    </button>
 
     <button onclick="alert('❤️ Ты отправила сердечко! Это демонстрация.')">
-    ❤️ Сердечко</button>
+      ❤️ Сердечко
+    </button>
 
     <button onclick="alert('🐈 Ты отправила котика! Это демонстрация.')">
-    🐈 Котик</button>
+      🐈 Котик
+    </button>
 
     <button onclick="rooms()">🏠 Список комнат</button>
-
     <button onclick="home()">⬅️ На главную</button>
   `;
-
 }
+
+/* ЗАПУСК */
 
 home();
 
