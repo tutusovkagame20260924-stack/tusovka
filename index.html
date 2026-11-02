@@ -50,6 +50,7 @@ button {
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 button:active {
@@ -121,6 +122,7 @@ p {
   white-space: nowrap;
   font-size: 12px;
   z-index: 2;
+  pointer-events: none;
 }
 
 /* МЕСТА ИГРОКОВ */
@@ -140,7 +142,10 @@ p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 1;
+  z-index: 10;
+  pointer-events: auto;
+  touch-action: manipulation;
+  cursor: pointer;
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
@@ -221,6 +226,19 @@ p {
 <script>
 
 const card = document.getElementById("card");
+
+/* ОБРАБОТКА НАЖАТИЙ НА ФУТБОЛЬНЫЕ МЕСТА */
+
+card.addEventListener("click", function(event) {
+  const seat = event.target.closest(".player-seat");
+
+  if (!seat) return;
+
+  takeSeat(
+    seat.dataset.team,
+    Number(seat.dataset.number)
+  );
+});
 
 /* ДЕМО-БАЛАНС */
 
@@ -387,14 +405,21 @@ function footballRoom() {
   let seatsHTML = "";
 
   for (let i = 1; i <= 5; i++) {
+
     seatsHTML += `
-      <button class="player-seat pink-seat seat-left seat-${i}"
-        onclick="takeSeat('pink', ${i})">
+      <button
+        class="player-seat pink-seat seat-left seat-${i}"
+        type="button"
+        data-team="pink"
+        data-number="${i}">
         ${occupiedSeats["pink" + i] || "<span>＋</span>Свободно"}
       </button>
 
-      <button class="player-seat blue-seat seat-right seat-${i}"
-        onclick="takeSeat('blue', ${i})">
+      <button
+        class="player-seat blue-seat seat-right seat-${i}"
+        type="button"
+        data-team="blue"
+        data-number="${i}">
         ${occupiedSeats["blue" + i] || "<span>＋</span>Свободно"}
       </button>
     `;
@@ -438,6 +463,7 @@ function footballRoom() {
 /* ЗАНЯТЬ МЕСТО */
 
 function takeSeat(team, number) {
+
   const key = team + number;
 
   if (occupiedSeats[key]) {
@@ -450,17 +476,21 @@ function takeSeat(team, number) {
     return;
   }
 
-  const avatar = prompt("Выбери эмодзи для своего аватара:", "😊");
+  const avatar = prompt(
+    "Выбери эмодзи для своего аватара:",
+    "😊"
+  );
 
   if (avatar === null || avatar.trim() === "") return;
 
-  occupiedSeats[key] = `<span>${escapeHTML(avatar.trim())}</span>Ты`;
+  occupiedSeats[key] =
+    `<span>${escapeHTML(avatar.trim())}</span>Ты`;
 
   footballRoom();
 }
 
 function escapeHTML(text) {
-  return text.replace(/[&<>"']/g, function(char) {
+  return String(text).replace(/[&<>"']/g, function(char) {
     return {
       "&": "&amp;",
       "<": "&lt;",
@@ -523,7 +553,9 @@ function publishTop() {
     return;
   }
 
-  const message = prompt("Напиши сообщение для ТОП (не больше 10 слов):");
+  const message = prompt(
+    "Напиши сообщение для ТОП (не больше 10 слов):"
+  );
 
   if (message === null) return;
 
