@@ -1,3 +1,4 @@
+Д
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -6,9 +7,7 @@
 <title>ТУСОВКА ❤️</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -53,13 +52,9 @@ button {
   touch-action: manipulation;
 }
 
-button:active {
-  transform: scale(0.98);
-}
+button:active { transform: scale(0.98); }
 
-p {
-  line-height: 1.5;
-}
+p { line-height: 1.5; }
 
 .coins {
   color: #b83280;
@@ -79,7 +74,7 @@ p {
   width: 100%;
   min-height: 330px;
   border-radius: 18px;
-  background-image: url("winte-room-1.png");
+  background-image: url("1794294596281.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -149,26 +144,16 @@ p {
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
-.pink-seat {
-  background: #ed65a5;
-}
-
-.blue-seat {
-  background: #4389e9;
-}
+.pink-seat { background: #ed65a5; }
+.blue-seat { background: #4389e9; }
 
 .player-seat span {
   font-size: 19px;
   line-height: 20px;
 }
 
-.seat-left {
-  left: 5px;
-}
-
-.seat-right {
-  right: 5px;
-}
+.seat-left { left: 5px; }
+.seat-right { right: 5px; }
 
 .seat-1 { top: 7%; }
 .seat-2 { top: 25%; }
@@ -191,9 +176,7 @@ p {
   overflow-wrap: anywhere;
 }
 
-.top-avatar {
-  font-size: 32px;
-}
+.top-avatar { font-size: 32px; }
 
 .top-text {
   font-weight: bold;
@@ -215,23 +198,19 @@ p {
 <body>
 
 <div class="container">
-
-<h1>ТУСОВКА ❤️</h1>
-<p>Твоя компания, твои друзья, твои приключения!</p>
-
-<div class="card" id="card"></div>
-
+  <h1>ТУСОВКА ❤️</h1>
+  <p>Твоя компания, твои друзья, твои приключения!</p>
+  <div class="card" id="card"></div>
 </div>
 
 <script>
 
 const card = document.getElementById("card");
 
-/* ОБРАБОТКА НАЖАТИЙ НА ФУТБОЛЬНЫЕ МЕСТА */
+/* ОБРАБОТКА ФУТБОЛЬНЫХ МЕСТ */
 
 card.addEventListener("click", function(event) {
   const seat = event.target.closest(".player-seat");
-
   if (!seat) return;
 
   takeSeat(
@@ -284,7 +263,6 @@ function home() {
     <p class="coins">🪙 Твои Тусы: ${demoCoins}</p>
 
     <button onclick="startGame()">🎮 Начать игру</button>
-
     <button onclick="rooms()">🏠 Комнаты</button>
 
     <button class="top-button" onclick="topGame()">
@@ -300,13 +278,10 @@ function startGame() {
     <h2>🎉 Твоя ТУСОВКА начинается!</h2>
 
     <p>💖 Здесь ты сможешь знакомиться и находить друзей.</p>
-
     <p>🎁 Впереди подарки, задания и игровые события!</p>
 
     <button onclick="rooms()">🏠 Выбрать комнату</button>
-
     <button class="top-button" onclick="topGame()">🏆 ТОП ИГРЫ</button>
-
     <button onclick="home()">⬅️ На главную</button>
   `;
 }
@@ -316,11 +291,9 @@ function startGame() {
 function rooms() {
   card.innerHTML = `
     <h2>🏠 Комнаты ТУСОВКИ</h2>
-
     <p>Выбери, куда отправимся!</p>
 
     <button onclick="newcomer()">💖 Знакомство с игрой</button>
-
     <button onclick="footballRoom()">⚽ Спортивная комната</button>
 
     <button onclick="openRoom('☕ Кафе',
@@ -331,7 +304,6 @@ function rooms() {
     <button onclick="seasons()">🌸 Времена года</button>
 
     <button class="top-button" onclick="topGame()">🏆 ТОП ИГРЫ</button>
-
     <button onclick="home()">⬅️ На главную</button>
   `;
 }
@@ -341,7 +313,6 @@ function rooms() {
 function seasons() {
   card.innerHTML = `
     <h2>🌸 Времена года</h2>
-
     <p>Выбери свою сезонную комнату!</p>
 
     <button onclick="winterRoom()">❄️ Зимняя комната</button>
@@ -373,7 +344,6 @@ function winterRoom() {
     </div>
 
     <p>Добро пожаловать в уютную зимнюю комнату!</p>
-
     <p>🔥 Тёплый камин, снежные пейзажи и приятная атмосфера.</p>
 
     <div class="room-info">
@@ -383,15 +353,11 @@ function winterRoom() {
     <p>🎁 Выбери подарок:</p>
 
     <button onclick="alert('🌹 Ты отправила розу! Демонстрация.')">🌹 Роза</button>
-
     <button onclick="alert('❤️ Ты отправила сердечко! Демонстрация.')">❤️ Сердечко</button>
-
     <button onclick="alert('🐈 Ты отправила котика! Демонстрация.')">🐈 Котик</button>
 
     <button onclick="seasons()">🌸 Сезоны</button>
-
     <button onclick="rooms()">🏠 Другие комнаты</button>
-
     <button onclick="home()">⬅️ На главную</button>
   `;
 }
@@ -401,11 +367,9 @@ function winterRoom() {
 let occupiedSeats = {};
 
 function footballRoom() {
-
   let seatsHTML = "";
 
   for (let i = 1; i <= 5; i++) {
-
     seatsHTML += `
       <button
         class="player-seat pink-seat seat-left seat-${i}"
@@ -445,17 +409,12 @@ function footballRoom() {
     <p>🎁 Спортивные подарки:</p>
 
     <button onclick="alert('🏆 Золотой кубок! Демонстрация.')">🏆 Золотой кубок</button>
-
     <button onclick="alert('🥈 Серебряный кубок! Демонстрация.')">🥈 Серебряный кубок</button>
-
     <button onclick="alert('⚽ Футбольный мяч! Демонстрация.')">⚽ Футбольный мяч</button>
-
     <button onclick="alert('🟥 Красная карточка! Демонстрация.')">🟥 Красная карточка</button>
 
     <button class="top-button" onclick="topGame()">🏆 ТОП ИГРЫ</button>
-
     <button onclick="rooms()">🏠 Другие комнаты</button>
-
     <button onclick="home()">⬅️ На главную</button>
   `;
 }
@@ -463,7 +422,6 @@ function footballRoom() {
 /* ЗАНЯТЬ МЕСТО */
 
 function takeSeat(team, number) {
-
   const key = team + number;
 
   if (occupiedSeats[key]) {
@@ -489,6 +447,8 @@ function takeSeat(team, number) {
   footballRoom();
 }
 
+/* ЗАЩИТА ТЕКСТА */
+
 function escapeHTML(text) {
   return String(text).replace(/[&<>"']/g, function(char) {
     return {
@@ -504,7 +464,6 @@ function escapeHTML(text) {
 /* ТОП ИГРЫ */
 
 function topGame() {
-
   let entriesHTML = "";
 
   if (topEntries.length === 0) {
@@ -525,7 +484,6 @@ function topGame() {
     <h2>🏆 ТОП ИГРЫ</h2>
 
     <p>🌟 Общая лента игроков ТУСОВКИ</p>
-
     <p class="coins">🪙 Твои Тусы: ${demoCoins}</p>
 
     <button class="top-button" onclick="publishTop()">
@@ -539,7 +497,6 @@ function topGame() {
     </p>
 
     <button onclick="rooms()">🏠 Комнаты</button>
-
     <button onclick="home()">⬅️ На главную</button>
   `;
 }
@@ -547,7 +504,6 @@ function topGame() {
 /* ПУБЛИКАЦИЯ В ТОП */
 
 function publishTop() {
-
   if (demoCoins < 10) {
     alert("Недостаточно Тус для публикации!");
     return;
@@ -582,7 +538,6 @@ function publishTop() {
   });
 
   topEntries = topEntries.slice(0, 6);
-
   saveTop();
 
   alert("🌟 Твоя запись появилась в ТОП! Списано 10 Тус.");
@@ -597,15 +552,11 @@ function newcomer() {
     <h2>💖 Знакомство с игрой</h2>
 
     <p>🌸 Добро пожаловать в ТУСОВКУ!</p>
-
     <p>👋 Здесь начинается твоё приключение.</p>
-
     <p>📋 Первое задание: поздоровайся с игроками.</p>
-
     <p>🎁 Твой первый подарок — «Привет!»</p>
 
     <button onclick="rooms()">🏠 Другие комнаты</button>
-
     <button onclick="home()">⬅️ На главную</button>
   `;
 }
@@ -625,15 +576,11 @@ function openRoom(title, description) {
     <p>🎁 Выбери подарок:</p>
 
     <button onclick="alert('🌹 Роза! Демонстрация.')">🌹 Роза</button>
-
     <button onclick="alert('❤️ Сердечко! Демонстрация.')">❤️ Сердечко</button>
-
     <button onclick="alert('🐈 Котик! Демонстрация.')">🐈 Котик</button>
 
     <button onclick="topGame()">🏆 ТОП ИГРЫ</button>
-
     <button onclick="rooms()">🏠 Список комнат</button>
-
     <button onclick="home()">⬅️ На главную</button>
   `;
 }
@@ -643,6 +590,5 @@ function openRoom(title, description) {
 home();
 
 </script>
-
 </body>
 </html>
